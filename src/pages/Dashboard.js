@@ -16,7 +16,7 @@ const Dashboard = () => {
                     <div className="dash-title">
                     <HeaderContainer />
                     </div>
-                    <div className="mid-chart1">mid chart</div>
+                    <div className="mid-chart1" style={{}}><Chart objectId="qEqbcMm"/></div>
                     <div className="mid-chart2">mid chart</div>
                     <div className="bottom-chart1">bottom chart</div>
                     <div className="bottom-chart2">bottom chart</div>
@@ -34,7 +34,7 @@ export default Dashboard;
 const DashboardContainer = styled.div`
     display: flex;
     align-items: center;
-    background-image: linear-gradient(#F66430, #F6A930);
+    background-image: linear-gradient(#00BEF1 , #00F1C7);
     height: 100vh;
 `
 const DashboardDiv = styled.div`
@@ -50,7 +50,7 @@ const DashboardDiv = styled.div`
 
 const SideBarDiv = styled.div`
     display: flex;
-    background-image: linear-gradient(#F6A930, #F66430);
+    background-image: linear-gradient(#00F1C7, #00BEF1 );
     height: 100%;
     width: 20%;
     border-radius: 20px 0 0 20px;
@@ -58,7 +58,7 @@ const SideBarDiv = styled.div`
     justify-content: start-end;
 `
 const ChartDiv = styled.div`
-background-color: #F8EEDF;
+background-image: linear-gradient(to right, white, white, white, #C5C5C5 );
 justify-content: center;
 color: black;
 border-radius: 0 20px 20px 0;
@@ -66,54 +66,69 @@ flex: 1;
 display: flex;
 flex-flow: row wrap;
 min-height: 80vh;
-border: 2px solid green;
+// border: 2px solid green;
 
     .dash-title {
         margin: 3px;
         align-items: center;
         justify-contents: center;
         order: 1;
-        flex: 0 1 100%;
-        border: 1px solid blue;
+        flex: 0 1 91%;
+        // border: 1px solid blue;
         height: 200px;
+        box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
+        border-radius: 10px;
     }
 
     .mid-chart1 {
         margin: 3px;
         order: 2;
-        flex: 0 1 40%;
-        border: 1px solid blue;
+        flex: 0 1 35%;
+        // border: 1px solid blue;
         min-height: 200px;
+        box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .mid-chart2 {
         margin: 3px;
         order: 3;
-        flex:  0 1 50%;
-        border: 1px solid blue;
+        flex:  0 1 55%;
+        //border: 1px solid blue;
+        box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
+        border-radius: 10px;
     }
 
     .bottom-chart1 {
-        height: 200px;
+        height: 210px;
         margin: 3px;
         order: 4;
         flex: 0 1 30%;
-        border: 1px solid blue;
+       // border: 1px solid blue;
+       box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
+       border-radius: 10px;
     }
 
     .bottom-chart2 {
-        height: 200px;
+        height: 210px;
         margin: 3px;
         order: 5;
         flex: 0 1 30%;
-        border: 1px solid blue;
+       // border: 1px solid blue;
+       box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
+       border-radius: 10px;
     }
 
     .bottom-chart3 {
-        height: 200px;
+        height: 210px;
         margin: 3px;
         order: 6;
         flex: 0 1 30%;
-        border: 1px solid blue;
+    //    border: 1px solid blue;
+       box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
+       border-radius: 10px;
     }
 `

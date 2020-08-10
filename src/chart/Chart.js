@@ -1,56 +1,55 @@
-import React, { useState,useContext, useEffect } from 'react'
-import QlikContext from '../context/QlikContext'
+import React, { useContext, useEffect, useState, useCallback, useRef  } from 'react';
+import ExtractData from '../helper/ExtractData'
+import ObjectsContext from '../context/ObjectsContext';
+import VerticalBarChart from '../chartBuilds/VerticalBarChart'
 
-const def = {
-    qInfo: {
-        qType: 'qHyperCube' 
-    },
-    qHyperCubeDef: {
-        qDimensions: [{ qDef: { qFieldDefs: ['Sales Rep Name']}}],
-        qMeasures: [ {qDef: { qDef: 'Avg([Lead Time])', qLabel: 'Average lead Time'}}],
-    }, 
-    qInitialDataFetch: [{ qTop: 0, qLeft: 0, qHeight: 100, qWidth: 3 }],  
-}
+const Chart = ({ objectId }) => {
+    const [model, setModel] = useState(null)
+    const [data, setData] = useState([])
+    const { getObject, getObjectLayout } = useContext(ObjectsContext)
+
+    const updateLayout = useCallback( 
+        async (model) => {
+            const layout = await getObjectLayout(model)
+            const { qDimensionInfo, qMeasureInfo } = await layout.qHyperCube;
+            console.log('qDim', qDimensionInfo)
+            const qMatrix = await layout.qHyperCube.qDataPages[0].qMatrix;
+            const newData = await ExtractData(qMatrix, qDimensionInfo, qMeasureInfo);
+            console.log(newData)
+            
+            setData(newData)
+
+    }, [getObjectLayout])
 
 
-const Chart = ({objectId}) => {
-    const {app} = useContext(QlikContext) 
-    const [data, setData] = useState(null)
-    const [madeData, setMadeData] = useState(null)
+	useEffect(() => {
+		(async () => {
+			if (!model) {		
+				if (objectId) {
+					const model = await getObject(objectId);
+					setModel(model);
+					await updateLayout(model);
+					await model.on("changed", () => updateLayout(model));
+				} 
+			}
+		})();
+		return () => {
+			if (model) {
+				setModel(null);
+                model.removeAllListeners();
+            }
+		};
+	}, [getObject,model, objectId, updateLayout]);
 
-    useEffect(() => {
-        const getObject = async () => {
-            const model = await app.getObject(objectId)
-            const layout = await model.getLayout()
-            const text = await layout.qHyperCube.qDataPages[0].qMatrix.map(item => item[0].qText)
-            const nums = await layout.qHyperCube.qDataPages[0].qMatrix.map(item => item[1].qNum)
-            const newData = [text, nums]
-            console.log('newData', newData)
-            setData(layout)
-        }
-        getObject()
-    }, [objectId, app])
 
-    useEffect(() => {
-        const createObject = async () => {
-            const model = await app.createSessionObject(def)
-            const layout = await model.getLayout()
-            const props = await model.getProperties()
-            console.log('createObject Layout:', layout)
-            console.log('createObject Properties:', props)
-            setMadeData(layout)
-        }
-        createObject()
-    }, [app])
 
-    
     return ( 
-            data || madeData ?
         <div>
-            <h1>Chart</h1>
+            <VerticalBarChart
+            data={data} />
+            
         </div> 
-        : null
     )
 }
 
-export default Chart;
+export default Chart

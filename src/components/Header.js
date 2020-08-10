@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
 const Header = () => {
     return (
         <HeaderContainer>
-            <h1>Dashboard</h1>
+            {/* <h1>Dashboard</h1> */}
         </HeaderContainer>
     )
 }

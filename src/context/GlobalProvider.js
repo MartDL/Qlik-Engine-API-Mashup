@@ -7,9 +7,9 @@ import { ObjectsProvider } from './ObjectsContext'
 const GlobalState = ({ children }) => {
   return (
     <QlikProvider>
-      {/* <ObjectsProvider> */}
+      <ObjectsProvider>
         {children}
-        {/* </ObjectsProvider> */}
+        </ObjectsProvider>
     </QlikProvider>
   )
 }
