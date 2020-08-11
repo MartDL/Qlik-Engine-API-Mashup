@@ -1,5 +1,6 @@
 import React from 'react';
-import Chart from '../chart/Chart'
+import Chart from '../chart/Chart';
+import TableChart from '../chartBuilds/TableChart'
 import styled from 'styled-components';
 import HeaderContainer from '../components/Header'
 
@@ -16,11 +17,29 @@ const Dashboard = () => {
                     <div className="dash-title">
                     <HeaderContainer />
                     </div>
-                    <div className="mid-chart1" style={{}}><Chart objectId="qEqbcMm"/></div>
-                    <div className="mid-chart2">mid chart</div>
-                    <div className="bottom-chart1">bottom chart</div>
-                    <div className="bottom-chart2">bottom chart</div>
-                    <div className="bottom-chart3">bottom chart</div>
+                    <div className="mid-chart1">
+                        <TableChart objectId="LXAaTP" />
+                        <Chart objectId="qEqbcMm" type="vertbar"/>
+                    </div>
+                    <div className="mid-chart2">
+                        <Chart objectId="WJYuPN" type="barchart"/>
+                    </div>
+                    <div className="bottom-chart1"></div>
+                    <div className="bottom-chart2">
+                    <Chart
+							type="linechart"
+							measures={[
+								{
+									formula: "Sum( [Sales Quantity]*[Sales Price])",
+									label: "Revenue",
+									sorting: { qSortByNumeric: -1 },
+								},
+							]}
+							dimensions={[{ field: "Product Group Desc", excludeNull: true }]}
+							className="chart"
+						/>
+                    </div>
+                    <div className="bottom-chart3"></div>
             </ChartDiv>
             </DashboardDiv>
         </DashboardContainer>
@@ -50,7 +69,7 @@ const DashboardDiv = styled.div`
 
 const SideBarDiv = styled.div`
     display: flex;
-    background-image: linear-gradient(#00F1C7, #00BEF1 );
+    background-image: linear-gradient(45deg, #00BEF1, #00BEF1, #00F1C7 );
     height: 100%;
     width: 20%;
     border-radius: 20px 0 0 20px;
@@ -87,7 +106,7 @@ min-height: 80vh;
         // border: 1px solid blue;
         min-height: 200px;
         box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
-        border-radius: 10px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -99,7 +118,7 @@ min-height: 80vh;
         flex:  0 1 55%;
         //border: 1px solid blue;
         box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
-        border-radius: 10px;
+        border-radius: 20px;
     }
 
     .bottom-chart1 {
@@ -109,7 +128,7 @@ min-height: 80vh;
         flex: 0 1 30%;
        // border: 1px solid blue;
        box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
-       border-radius: 10px;
+       border-radius: 20px;
     }
 
     .bottom-chart2 {
@@ -119,7 +138,7 @@ min-height: 80vh;
         flex: 0 1 30%;
        // border: 1px solid blue;
        box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
-       border-radius: 10px;
+       border-radius: 20px;
     }
 
     .bottom-chart3 {
@@ -129,6 +148,6 @@ min-height: 80vh;
         flex: 0 1 30%;
     //    border: 1px solid blue;
        box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.5);
-       border-radius: 10px;
+       border-radius: 20px;
     }
 `

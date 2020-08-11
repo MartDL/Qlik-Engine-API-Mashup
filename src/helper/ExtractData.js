@@ -1,4 +1,4 @@
-const ConvertData = async (qMatrix, qDimensionInfo, qMeasureInfo) => {
+const ExtractData = async (qMatrix, qDimensionInfo, qMeasureInfo) => {
 	const newData = await qMatrix.map((x) => (
 		{
 		qElemNumber: x[0].qElemNumber,
@@ -20,4 +20,4 @@ const ConvertData = async (qMatrix, qDimensionInfo, qMeasureInfo) => {
 	return newData;
 };
 
-export default ConvertData;
+export default ExtractData;

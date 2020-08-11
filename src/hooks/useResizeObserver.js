@@ -9,6 +9,7 @@ const useResizeObserver = (ref) => {
 		const resizeObserver = new ResizeObserver((entries) => {
 			entries.forEach((entry) => {
 				setDimensions(entry.contentRect);
+				// console.log(entries)
 			});
 		});
 		resizeObserver.observe(observeTarget);
