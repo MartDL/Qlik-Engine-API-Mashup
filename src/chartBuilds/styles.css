@@ -1,0 +1,13 @@
+.budgetLine {
+    fill: none;
+    stroke: orange;
+    stroke-width: 3px;
+    stroke-linejoin: miter;
+}
+
+.amountLine {
+    fill: none;
+    stroke: #00BEF1;
+    stroke-width: 3px;
+    stroke-linejoin: miter;
+}
